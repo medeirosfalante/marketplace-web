@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Logo from "@components/logo";
 import Slider, { SliderItem } from "@ui/slider";
-import Image from "next/image";
 
 const CommingSoonArea = () => (
     <div className="maintanence-area">
