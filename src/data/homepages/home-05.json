@@ -3,7 +3,7 @@
     "content": [
         {
             "section": "hero-section",
-            "badge": "Nuron Marketplace",
+            "badge": "EnablersDAO Marketplace",
             "title": "Search your rare NFT's by world  <br/>  class artists",
             "description": "Where Bitcoin was hailed as the digital answer to currency, NFTs <br/> are now being touted as the digital answer to collectables.",
             "buttons": [
@@ -43,7 +43,7 @@
                     "title": "Set up your wallet",
                     "path": "/connect",
                     "subtitle": "Step-01",
-                    "description": "Powerful features and inclusions, which makes Nuron standout, easily customizable and scalable.",
+                    "description": "Powerful features and inclusions, which makes EnablersDAO standout, easily customizable and scalable.",
                     "images": [
                         {
                             "src": "/images/icons/shape-7.png"

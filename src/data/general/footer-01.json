@@ -7,14 +7,14 @@
                 "alt": "logo"
             }
         ],
-        "text": "Created with the collaboration of over 60 of the world's best Nuron Artists."
+        "text": "Created with the collaboration of over 60 of the world's best EnablersDAO Artists."
     },
     "newsletter-widget": {
-        "title": "Get The Latest Nuron Updates",
+        "title": "Get The Latest EnablersDAO Updates",
         "note": "Email is safe. We don't spam."
     },
     "quicklink-widget": {
-        "title": "Nuron",
+        "title": "EnablersDAO",
         "menu": [
             {
                 "id": 1,
@@ -45,12 +45,8 @@
                 "id": 6,
                 "text": "Activity Log",
                 "path": "/activity"
-            },
-            {
-                "id": 7,
-                "text": "System Auto Since",
-                "path": "/blog"
             }
+           
         ]
     },
     "information-widget": {
@@ -60,37 +56,8 @@
                 "id": 1,
                 "text": "Market Explore",
                 "path": "/explore-01"
-            },
-            {
-                "id": 2,
-                "text": "Ready Token",
-                "path": "/about"
-            },
-            {
-                "id": 3,
-                "text": "Otimize Time",
-                "path": "/about"
-            },
-            {
-                "id": 4,
-                "text": "Main Option",
-                "path": "/about"
-            },
-            {
-                "id": 5,
-                "text": "Blog Grid",
-                "path": "/blog"
-            },
-            {
-                "id": 6,
-                "text": "About Us",
-                "path": "/about"
-            },
-            {
-                "id": 7,
-                "text": "Fix Bug",
-                "path": "/blog"
             }
+ 
         ]
     },
     "soldout-widget": {
@@ -142,5 +109,5 @@
             }
         ]
     },
-    "copyright_text": "©2022 Nuron, Inc. All rights reserved"
+    "copyright_text": "©2022 EnablersDAO, Inc. All rights reserved"
 }
