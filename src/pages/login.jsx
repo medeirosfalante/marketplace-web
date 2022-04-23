@@ -14,7 +14,7 @@ const Login = () => (
         <SEO pageTitle="Log In" />
         <Header />
         <main id="main-content">
-            <Breadcrumb pageTitle="EnablersDAO Login" currentPage="EnablersDAO Login" />
+            <Breadcrumb pageTitle="Login" currentPage="Login" />
             <LoginArea />
         </main>
         <Footer />
