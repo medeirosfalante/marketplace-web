@@ -10,7 +10,7 @@ import "../assets/scss/style.scss";
 import "react-toastify/dist/ReactToastify.css";
 
 import { Provider } from "react-redux";
-import { store, persistor } from "./store";
+import { store, persistor } from "../store";
 
 
 const MyApp = ({ Component, pageProps }) => {

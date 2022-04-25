@@ -17,7 +17,7 @@ import headerData from "../../../data/general/header-01.json";
 import menuData from "../../../data/general/menu-01.json";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
-import * as WalletActions from "../../../pages/store/modules/wallet/actions";
+import * as WalletActions from "../../../store/modules/wallet/actions";
 import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { ethers, Contract, getDefaultProvider, utils } from "ethers";
