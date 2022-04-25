@@ -18,4 +18,5 @@ module.exports = {
     images: {
         domains: ['bscscan.com','pbs.twimg.com','s2.coinmarketcap.com'],
     },
+    pageExtensions: ['mdx', 'md', 'jsx', 'js', 'tsx', 'ts'],
 };
