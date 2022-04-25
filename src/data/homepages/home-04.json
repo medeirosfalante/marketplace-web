@@ -9,8 +9,8 @@
             "buttons": [
                 {
                     "id": 1,
-                    "path": "/login",
-                    "content": "Get Started"
+                    "path": "/user",
+                    "content": "My NFTs"
                 },
                 {
                     "id": 2,

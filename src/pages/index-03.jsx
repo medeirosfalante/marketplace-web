@@ -2,16 +2,16 @@ import SEO from "@components/seo";
 import Wrapper from "@layout/wrapper";
 import Header from "@layout/header/header-01";
 import Footer from "@layout/footer/footer-01";
-import HeroArea from "@containers/hero/layout-04";
-import LiveExploreArea from "@containers/live-explore/layout-01";
-import ExploreProductArea from "@containers/explore-product/layout-03";
-import TopSellerArea from "@containers/top-seller/layout-01";
+import HeroArea from "@containers/hero/layout-03";
+import LiveExploreArea from "@containers/live-explore/layout-02";
 import ServiceArea from "@containers/services/layout-01";
+import ExploreProductArea from "@containers/explore-product/layout-02";
+import TopSellerArea from "@containers/top-seller/layout-01";
 import CollectionArea from "@containers/collection/layout-01";
 import { normalizedData } from "@utils/methods";
 
 // Demo data
-import homepageData from "../data/homepages/home-04.json";
+import homepageData from "../data/homepages/home-03.json";
 import sellerData from "../data/sellers.json";
 import productData from "../data/products.json";
 import collectionsData from "../data/collections.json";
@@ -20,7 +20,7 @@ export async function getStaticProps() {
     return { props: { className: "template-color-1" } };
 }
 
-const Home = () => {
+const Home02 = () => {
     const content = normalizedData(homepageData?.content || []);
     const liveAuctionData = productData
         .filter(
@@ -35,7 +35,7 @@ const Home = () => {
         .slice(0, 5);
     return (
         <Wrapper>
-            <SEO pageTitle="Home Four" />
+            <SEO pageTitle="Home Three" />
             <Header />
             <main id="main-content">
                 <HeroArea data={content["hero-section"]} />
@@ -45,6 +45,7 @@ const Home = () => {
                         products: liveAuctionData,
                     }}
                 />
+                <ServiceArea data={content["service-section"]} />
                 <ExploreProductArea
                     data={{
                         ...content["explore-product-section"],
@@ -57,7 +58,6 @@ const Home = () => {
                         sellers: sellerData,
                     }}
                 />
-                <ServiceArea data={content["service-section"]} />
                 <CollectionArea
                     data={{
                         ...content["collection-section"],
@@ -70,4 +70,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Home02;

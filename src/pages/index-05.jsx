@@ -2,10 +2,10 @@ import SEO from "@components/seo";
 import Wrapper from "@layout/wrapper";
 import Header from "@layout/header/header-01";
 import Footer from "@layout/footer/footer-01";
-import HeroArea from "@containers/hero/layout-04";
-import LiveExploreArea from "@containers/live-explore/layout-01";
-import ExploreProductArea from "@containers/explore-product/layout-03";
+import Particles from "@ui/particles";
+import HeroArea from "@containers/hero/layout-05";
 import TopSellerArea from "@containers/top-seller/layout-01";
+import ExploreProductArea from "@containers/explore-product/layout-03";
 import ServiceArea from "@containers/services/layout-01";
 import CollectionArea from "@containers/collection/layout-01";
 import { normalizedData } from "@utils/methods";
@@ -17,7 +17,7 @@ import productData from "../data/products.json";
 import collectionsData from "../data/collections.json";
 
 export async function getStaticProps() {
-    return { props: { className: "template-color-1" } };
+    return { props: { className: "template-color-1 with-particles" } };
 }
 
 const Home = () => {
@@ -32,29 +32,30 @@ const Home = () => {
                 Number(new Date(b.published_at)) -
                 Number(new Date(a.published_at))
         )
-        .slice(0, 5);
+        .slice(0, 2);
+
     return (
         <Wrapper>
-            <SEO pageTitle="Home Four" />
+            <SEO pageTitle="Home five" />
             <Header />
             <main id="main-content">
-                <HeroArea data={content["hero-section"]} />
-                <LiveExploreArea
+                <Particles />
+                <HeroArea
                     data={{
-                        ...content["live-explore-section"],
+                        ...content["hero-section"],
                         products: liveAuctionData,
-                    }}
-                />
-                <ExploreProductArea
-                    data={{
-                        ...content["explore-product-section"],
-                        products: productData,
                     }}
                 />
                 <TopSellerArea
                     data={{
                         ...content["top-sller-section"],
                         sellers: sellerData,
+                    }}
+                />
+                <ExploreProductArea
+                    data={{
+                        ...content["explore-product-section"],
+                        products: productData,
                     }}
                 />
                 <ServiceArea data={content["service-section"]} />

@@ -7,7 +7,6 @@ const UserDropdown = () => {
 
     const { address, assets } = useSelector((state) => state.wallet);
 
-    console.log(assets)
     return (
         <div className="icon-box">
             <Anchor path="/author">
