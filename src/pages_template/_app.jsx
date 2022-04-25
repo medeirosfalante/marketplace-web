@@ -9,9 +9,8 @@ import "../assets/css/feather.css";
 import "../assets/scss/style.scss";
 import "react-toastify/dist/ReactToastify.css";
 
-import { Provider } from "react-redux";
-import { store, persistor } from "./store";
-
+const moralisAppId = "RthQq8e4P7aK65qA9AxkrUhs1r2l4LbVBvJ6L71v";
+const moralisServerURL = "https://u9r1l5bklpfl.usemoralis.com:2053/server";
 
 const MyApp = ({ Component, pageProps }) => {
     const router = useRouter();
@@ -26,11 +25,11 @@ const MyApp = ({ Component, pageProps }) => {
         document.body.className = `${pageProps.className}`;
     });
     return (
-        <Provider store={store}>
+        <MoralisProvider appId={moralisAppId} serverUrl={moralisServerURL}>
             <ThemeProvider defaultTheme="dark">
                 <Component {...pageProps} />
             </ThemeProvider>
-        </Provider>
+        </MoralisProvider>
     );
 };
 

@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { useCallback, useEffect } from "react";
 import clsx from "clsx";
 import { useMoralis } from "react-moralis";
 import Logo from "@components/logo";
@@ -15,12 +16,131 @@ import { useOffcanvas, useSticky, useFlyoutSearch } from "@hooks";
 import headerData from "../../../data/general/header-01.json";
 import menuData from "../../../data/general/menu-01.json";
 import Image from "next/image";
+import { useDispatch, useSelector } from "react-redux";
+import * as WalletActions from "../../../pages/store/modules/wallet/actions";
+import Web3Modal from "web3modal";
+import WalletConnectProvider from "@walletconnect/web3-provider";
+import { ethers, Contract, getDefaultProvider, utils } from "ethers";
+
+import erc20 from "../../../data/erc20.json";
+import tokens from "../../../data/tokens.json";
+
+const providerOptions = {
+    // walletconnect: {
+    //     package: WalletConnectProvider, // required
+    //     options: {
+    //         infuraId: process.env.NEXT_PUBLIC_INFURA_ID,
+    //     },
+    // },
+};
+
+let web3Modal;
+if (typeof window !== "undefined") {
+    web3Modal = new Web3Modal({
+        network: "mainnet", // optional
+        cacheProvider: true,
+        providerOptions, // required
+    });
+}
 
 const Header = ({ className }) => {
     const sticky = useSticky();
     const { offcanvas, offcanvasHandler } = useOffcanvas();
     const { search, searchHandler } = useFlyoutSearch();
-    const { authenticate, isAuthenticated } = useMoralis();
+    const dispatch = useDispatch();
+    const { isAuthenticated, provider, address, web3Provider } = useSelector(
+        (state) => state.wallet
+    );
+
+    const authenticate = useCallback(async () => {
+        try {
+            const provider = await web3Modal.connect();
+            const web3Provider = new ethers.providers.Web3Provider(provider);
+            const signer = web3Provider.getSigner();
+            const address = await signer.getAddress();
+            const network = await web3Provider.getNetwork();
+
+            dispatch(
+                WalletActions.setProvider({
+                    provider,
+                    web3Provider,
+                    address,
+                    network,
+                })
+            );
+        } catch (e) {
+            console.log("connect error", e);
+        }
+    });
+    const getTokens = async (address, web3Provider) => {
+        let Promises = [];
+        tokens.forEach(async (item) => {
+            const contract = new Contract(item.address, erc20, web3Provider);
+            Promises.push(
+                new Promise((resolve, reject) => {
+                    contract
+                        .balanceOf(address)
+                        .then((balance) =>
+                            resolve({
+                                icon: item.icon,
+                                name: item.name,
+                                symbol: item.symbol,
+                                balance: parseFloat(
+                                    utils.formatUnits(balance, item.decimals)
+                                ),
+                            })
+                        )
+                        .catch((e) => reject(e));
+                })
+            );
+        });
+        return Promise.all(Promises);
+    };
+
+    useEffect(async () => {
+        if (address) {
+            let listbalances = await getTokens(address, web3Provider);
+            dispatch(WalletActions.setBalances({ assets: listbalances }));
+        }
+    }, [address, web3Provider, dispatch]);
+
+    useEffect(() => {
+        if (web3Modal && web3Modal.cachedProvider) {
+            authenticate();
+        }
+    }, []);
+    useEffect(() => {
+        if (provider?.on) {
+            const handleAccountsChanged = (accounts) =>
+                dispatch(WalletActions.setAddress({ address: accounts[0] }));
+            const handleChainChanged = (_hexChainId) => {
+                if (typeof window !== "undefined") {
+                    console.log("switched to chain...", _hexChainId);
+                    window.location.reload();
+                } else {
+                    console.log("window is undefined");
+                }
+            };
+
+            const handleDisconnect = (error) => {};
+
+            provider.on("accountsChanged", handleAccountsChanged);
+            provider.on("chainChanged", handleChainChanged);
+            provider.on("disconnect", handleDisconnect);
+
+            // Subscription Cleanup
+            return () => {
+                if (provider.removeListener) {
+                    provider.removeListener(
+                        "accountsChanged",
+                        handleAccountsChanged
+                    );
+                    provider.removeListener("chainChanged", handleChainChanged);
+                    provider.removeListener("disconnect", handleDisconnect);
+                }
+            };
+        }
+    }, [provider]);
 
     return (
         <>

@@ -15,4 +15,7 @@ module.exports = {
         ];
         return config;
     },
+    images: {
+        domains: ['bscscan.com','pbs.twimg.com','s2.coinmarketcap.com'],
+    },
 };

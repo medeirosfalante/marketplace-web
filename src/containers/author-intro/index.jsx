@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import Image from "next/image";
@@ -10,6 +11,8 @@ import Anchor from "@ui/anchor";
 const AuthorIntroArea = ({ className, space, data }) => {
     const [isShareModalOpen, setIsShareModalOpen] = useState(false);
     const shareModalHandler = () => setIsShareModalOpen((prev) => !prev);
+    const { address } = useSelector((state) => state.wallet);
+
     return (
         <>
             <ShareModal
@@ -53,7 +56,7 @@ const AuthorIntroArea = ({ className, space, data }) => {
                                     )}
 
                                     <div className="rn-author-info-content">
-                                        <h4 className="title">{data.name}</h4>
+                                        <h4 className="title">{address}</h4>
                                         <a
                                             href="https://twitter.com"
                                             target="_blank"
