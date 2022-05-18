@@ -1,7 +1,7 @@
 const path = require("path");
 
 module.exports = {
-    reactStrictMode: true,
+    reactStrictMode: false,
     sassOptions: {
         includePaths: [path.join(__dirname, "./src/assets/scss")],
     },
@@ -16,7 +16,7 @@ module.exports = {
         return config;
     },
     images: {
-        domains: ['bscscan.com','pbs.twimg.com','s2.coinmarketcap.com'],
+        domains: ['bscscan.com','pbs.twimg.com','s2.coinmarketcap.com','chainstack.com',"cdn.iconscout.com"],
     },
     pageExtensions: ['mdx', 'md', 'jsx', 'js', 'tsx', 'ts'],
 };

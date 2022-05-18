@@ -8,6 +8,7 @@ import MobileMenu from "@components/menu/mobile-menu";
 import SearchForm from "@components/search-form/layout-01";
 import FlyoutSearchForm from "@components/search-form/layout-02";
 import UserDropdown from "@components/user-dropdown";
+import NetworkDropDown from "@components/network-dropdown";
 import ColorSwitcher from "@components/color-switcher";
 import BurgerButton from "@ui/burger-button";
 import Anchor from "@ui/anchor";
@@ -37,7 +38,6 @@ const providerOptions = {
 let web3Modal;
 if (typeof window !== "undefined") {
     web3Modal = new Web3Modal({
-        network: "mainnet", // optional
         cacheProvider: true,
         providerOptions, // required
     });
@@ -48,7 +48,7 @@ const Header = ({ className }) => {
     const { offcanvas, offcanvasHandler } = useOffcanvas();
     const { search, searchHandler } = useFlyoutSearch();
     const dispatch = useDispatch();
-    const { isAuthenticated, provider, address, web3Provider } = useSelector(
+    const { isAuthenticated, provider, address, web3Provider,network } = useSelector(
         (state) => state.wallet
     );
 
@@ -96,6 +96,13 @@ const Header = ({ className }) => {
         });
         return Promise.all(Promises);
     };
+
+    useEffect(async () => {
+
+
+      
+    }, [network]);
+
 
     useEffect(async () => {
         if (address) {
@@ -203,6 +210,9 @@ const Header = ({ className }) => {
                                     <UserDropdown />
                                 </div>
                             )}
+                               <div className="setting-option rn-icon-list user-account">
+                                    <NetworkDropDown />
+                                </div>
                             <div className="setting-option rn-icon-list notification-badge">
                                 <div className="icon-box">
                                     <Anchor path={headerData.activity_link}>
