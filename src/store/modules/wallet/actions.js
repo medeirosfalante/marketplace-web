@@ -3,6 +3,7 @@ import {
     RESET_WEB3_PROVIDER,
     SET_WEB3_ADDRESS,
     SET_WEB3_ASSETS,
+    SET_WEB3_NETWORK,
 } from "./types";
 
 export function setProvider({ provider, web3Provider, address, network }) {
@@ -20,6 +21,13 @@ export function setAddress({ address }) {
     return {
         type: SET_WEB3_ADDRESS,
         payload: { address },
+    };
+}
+
+export function SetNetwork(network) {
+    return {
+        type: SET_WEB3_NETWORK,
+        payload: { network },
     };
 }
 

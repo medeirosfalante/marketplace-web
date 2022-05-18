@@ -8,6 +8,7 @@ import MobileMenu from "@components/menu/mobile-menu";
 import SearchForm from "@components/search-form/layout-01";
 import FlyoutSearchForm from "@components/search-form/layout-02";
 import UserDropdown from "@components/user-dropdown";
+import NetworkDropDown from "@components/network-dropdown";
 import ColorSwitcher from "@components/color-switcher";
 import BurgerButton from "@ui/burger-button";
 import Anchor from "@ui/anchor";
@@ -23,6 +24,7 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 import { ethers, Contract, getDefaultProvider, utils } from "ethers";
 
 import erc20 from "../../../data/erc20.json";
+import networkRefs from "../../../data/network.json";
 import tokens from "../../../data/tokens.json";
 
 const providerOptions = {
@@ -37,7 +39,6 @@ const providerOptions = {
 let web3Modal;
 if (typeof window !== "undefined") {
     web3Modal = new Web3Modal({
-        network: "mainnet", // optional
         cacheProvider: true,
         providerOptions, // required
     });
@@ -48,7 +49,7 @@ const Header = ({ className }) => {
     const { offcanvas, offcanvasHandler } = useOffcanvas();
     const { search, searchHandler } = useFlyoutSearch();
     const dispatch = useDispatch();
-    const { isAuthenticated, provider, address, web3Provider } = useSelector(
+    const { isAuthenticated, provider, address, web3Provider,network, networks } = useSelector(
         (state) => state.wallet
     );
 
@@ -60,12 +61,15 @@ const Header = ({ className }) => {
             const address = await signer.getAddress();
             const network = await web3Provider.getNetwork();
 
+            let seletecItem = networkRefs.find(item => item.key == network.name)
+            dispatch(WalletActions.SetNetwork(seletecItem));
+
             dispatch(
                 WalletActions.setProvider({
                     provider,
                     web3Provider,
                     address,
-                    network,
+                    network:seletecItem,
                 })
             );
         } catch (e) {
@@ -74,8 +78,9 @@ const Header = ({ className }) => {
     });
     const getTokens = async (address, web3Provider) => {
         let Promises = [];
+        console.log(network.chainId)
         tokens.forEach(async (item) => {
-            const contract = new Contract(item.address, erc20, web3Provider);
+            const contract = new Contract(item.address[network.chainId], erc20, web3Provider);
             Promises.push(
                 new Promise((resolve, reject) => {
                     contract
@@ -98,7 +103,14 @@ const Header = ({ className }) => {
     };
 
     useEffect(async () => {
-        if (address) {
+
+
+      
+    }, [network]);
+
+
+    useEffect(async () => {
+        if (address && network) {
             let listbalances = await getTokens(address, web3Provider);
             dispatch(WalletActions.setBalances({ assets: listbalances }));
         }
@@ -203,6 +215,9 @@ const Header = ({ className }) => {
                                     <UserDropdown />
                                 </div>
                             )}
+                               <div className="setting-option rn-icon-list user-account">
+                                    <NetworkDropDown />
+                                </div>
                             <div className="setting-option rn-icon-list notification-badge">
                                 <div className="icon-box">
                                     <Anchor path={headerData.activity_link}>
