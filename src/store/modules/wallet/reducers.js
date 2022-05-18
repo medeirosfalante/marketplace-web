@@ -47,27 +47,11 @@ export default function reducer(state = INITIAL_STATE, action) {
                 draft.provider = action.payload.provider;
                 draft.web3Provider = action.payload.web3Provider;
                 draft.address = action.payload.address;
-                draft.network = {
-                    name: "Binance Smartchain",
-                    key: "bsc",
-                    chainName: "Binance Smartchain Mainnet",
-                    rpc: ["https://rpc-mainnet.matic.network/"],
-                    chainId: "0x38",
-                    icon:
-                        "https://chainstack.com/wp-content/uploads/2021/06/bsc-icon-logo-1-1.png",
-                    nativeCurrency: {
-                        name: "BNB",
-                        symbol: "BNB",
-                        decimals: 18,
-                    },
-                    blockExplorerUrls: [
-                        "https://chainstack.com/wp-content/uploads/2021/06/bsc-icon-logo-1-1.png",
-                    ],
-                };
+                draft.network = action.payload.network;
                 draft.networks = [
                     {
                         name: "Binance Smartchain",
-                        key: "bsc",
+                        key: "bnb",
                         chainName: "Binance Smartchain Mainnet",
                         rpcUrls: ["https://rpc-mainnet.matic.network/"],
                         chainId: "0x38",

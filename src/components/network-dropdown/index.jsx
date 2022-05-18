@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Anchor from "@ui/anchor";
 
-import { useState } from "react";
+import { useCallback, useEffect ,useState} from "react";
 import { ethers, Contract, getDefaultProvider, utils } from "ethers";
 import * as WalletActions from "../../store/modules/wallet/actions";
 
@@ -12,10 +12,10 @@ const UserDropdown = () => {
 
     const { networks, network } = useSelector((state) => state.wallet);
 
+    
+
+
     const selectNetwork = (item) => {
-
-        console.log(item)
-
         window.ethereum.request({
             method: "wallet_addEthereumChain",
             params: [{
@@ -30,7 +30,7 @@ const UserDropdown = () => {
                 blockExplorerUrls: item.blockExplorerUrls
             }]
         });
-        // dispatch(WalletActions.SetNetwork(item));
+        dispatch(WalletActions.SetNetwork(item));
     };
 
     return (
