@@ -1,16 +1,16 @@
 import PropTypes from "prop-types";
 import Anchor from "@ui/anchor";
 
-const SubMenu = ({ menu }) => (
+const SubMenu = ({ categories }) => (
     <ul className="submenu">
-        {menu.map((nav) => (
-            <li key={nav.id}>
+        {categories.map((nav) => (
+            <li key={nav.id._hex}>
                 <Anchor
-                    path={nav.path}
-                    className={nav.isLive ? "live-expo" : ""}
+                    path={nav.icon}
+                    // className={nav.isLive ? "live-expo" : ""}
                 >
-                    {nav.text}
-                    {nav?.icon && <i className={`feather ${nav.icon}`} />}
+                    {nav.name}
+                    {/* {nav?.icon && <i className={`feather ${nav.icon}`} />} */}
                 </Anchor>
             </li>
         ))}

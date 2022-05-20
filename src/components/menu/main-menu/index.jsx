@@ -4,7 +4,7 @@ import clsx from "clsx";
 import SubMenu from "./submenu";
 import MegaMenu from "./megamenu";
 
-const MainMenu = ({ menu }) => (
+const MainMenu = ({ menu, categories }) => (
     <ul className="mainmenu">
         {menu.map((nav) => (
             <li
@@ -17,7 +17,7 @@ const MainMenu = ({ menu }) => (
                 <Anchor className="its_new" path={nav.path}>
                     {nav.text}
                 </Anchor>
-                {nav?.submenu && <SubMenu menu={nav.submenu} />}
+                {nav?.submenu && <SubMenu categories={categories} />}
                 {nav?.megamenu && <MegaMenu menu={nav.megamenu} />}
             </li>
         ))}
