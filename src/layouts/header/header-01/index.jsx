@@ -74,6 +74,11 @@ const Header = ({ className }) => {
                 web3Provider
             );
             const categories = await contract.listCategory();
+            // const orders = await contract.listOrders();
+            // const newOrder = await contract.createOrder();
+            // console.log(contract);
+            // console.log(orders);
+            // console.log(newOrder);
 
             let seletecItem = networkRefs.find(
                 (item) => item.key == network.name
@@ -88,6 +93,7 @@ const Header = ({ className }) => {
                     web3Provider,
                     address,
                     network: seletecItem,
+                    contract,
                 })
             );
         } catch (e) {
@@ -267,6 +273,7 @@ const Header = ({ className }) => {
                 onClick={offcanvasHandler}
                 menu={menuData}
                 logo={headerData.logo}
+                categories={category}
             />
         </>
     );

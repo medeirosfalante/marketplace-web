@@ -7,7 +7,7 @@ import { slideToggle, slideUp } from "@utils/methods";
 import SubMenu from "./submenu";
 import MegaMenu from "./megamenu";
 
-const MobileMenu = ({ isOpen, onClick, menu, logo }) => {
+const MobileMenu = ({ isOpen, onClick, menu, categories, logo }) => {
     const onClickHandler = (e) => {
         e.preventDefault();
         const { target } = e;
@@ -57,7 +57,7 @@ const MobileMenu = ({ isOpen, onClick, menu, logo }) => {
                                         {nav.text}
                                     </Anchor>
                                     {nav?.submenu && (
-                                        <SubMenu menu={nav.submenu} />
+                                        <SubMenu categories={categories} />
                                     )}
                                     {nav?.megamenu && (
                                         <MegaMenu menu={nav.megamenu} />
