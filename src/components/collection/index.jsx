@@ -12,7 +12,7 @@ const Collection = ({
 }) => (
     <Anchor path={path} className="rn-collection-inner-one">
         <div className="collection-wrapper">
-            {image?.src && (
+            {/* {image?.src && (
                 <div className="collection-big-thumbnail">
                     <Image
                         src={image.src}
@@ -44,7 +44,7 @@ const Collection = ({
                         height={80}
                     />
                 </div>
-            )}
+            )} */}
 
             <div className="collection-deg">
                 <h6 className="title">{title}</h6>
@@ -54,27 +54,27 @@ const Collection = ({
     </Anchor>
 );
 
-Collection.propTypes = {
-    title: PropTypes.string.isRequired,
-    total_item: PropTypes.number.isRequired,
-    path: PropTypes.string.isRequired,
-    image: PropTypes.shape({
-        src: PropTypes.oneOfType([PropTypes.shape(), PropTypes.string])
-            .isRequired,
-        alt: PropTypes.string,
-    }).isRequired,
-    thumbnails: PropTypes.arrayOf(
-        PropTypes.shape({
-            src: PropTypes.oneOfType([PropTypes.shape(), PropTypes.string])
-                .isRequired,
-            alt: PropTypes.string,
-        }).isRequired
-    ).isRequired,
-    profile_image: PropTypes.shape({
-        src: PropTypes.oneOfType([PropTypes.shape(), PropTypes.string])
-            .isRequired,
-        alt: PropTypes.string,
-    }).isRequired,
-};
+// Collection.propTypes = {
+//     title: PropTypes.string.isRequired,
+//     total_item: PropTypes.number.isRequired,
+// path: PropTypes.string.isRequired,
+// image: PropTypes.shape({
+//     src: PropTypes.oneOfType([PropTypes.shape(), PropTypes.string])
+//         .isRequired,
+//     alt: PropTypes.string,
+// }).isRequired,
+// thumbnails: PropTypes.arrayOf(
+//     PropTypes.shape({
+//         src: PropTypes.oneOfType([PropTypes.shape(), PropTypes.string])
+//             .isRequired,
+//         alt: PropTypes.string,
+//     }).isRequired
+// ).isRequired,
+// profile_image: PropTypes.shape({
+//     src: PropTypes.oneOfType([PropTypes.shape(), PropTypes.string])
+//         .isRequired,
+//     alt: PropTypes.string,
+// }).isRequired,
+// };
 
 export default Collection;

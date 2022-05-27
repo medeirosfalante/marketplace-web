@@ -46,14 +46,21 @@ const Home = () => {
         .slice(0, 5);
 
     const handleCollections = async () => {
+        if (contract === undefined) {
+            return;
+        }
         const collections = await contract.listCollections();
+        // let collectionsRefs = collections.map((item) => {
+        //     return { name: item[2], address: item[1] };
+        // });
+        // console.log(collectionsRefs);
         setCollection(collections);
-        console.log(collections);
+        // console.log(collections);
     };
 
     useEffect(async () => {
-        await handleCollections();
-    }, []);
+        handleCollections();
+    }, [contract]);
 
     return (
         <Wrapper>

@@ -12,10 +12,10 @@ const SectionTitle = ({ title, className, disableAnimation, ...restProps }) => (
     />
 );
 
-SectionTitle.propTypes = {
-    title: PropTypes.string.isRequired,
-    className: PropTypes.string,
-    disableAnimation: PropTypes.bool,
-};
+// SectionTitle.propTypes = {
+//     title: PropTypes.string.isRequired,
+//     className: PropTypes.string,
+//     disableAnimation: PropTypes.bool,
+// };
 
 export default SectionTitle;

@@ -16,6 +16,7 @@ const TopCollectionArea = ({ className, id, space, data }) => (
     >
         <div className="container">
             <div className="row mb--50 align-items-center">
+                {console.log(data)}
                 <div className="col-lg-6 col-md-6 col-sm-6 col-12">
                     {data?.section_title && (
                         <SectionTitle
@@ -42,19 +43,20 @@ const TopCollectionArea = ({ className, id, space, data }) => (
                 <div className="row g-5">
                     {data.collections.map((item) => (
                         <div
-                            key={item.id}
+                            key={item.name}
                             data-sal="slide-up"
                             data-sal-delay="150"
                             data-sal-duration="800"
                             className="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-12"
                         >
                             <Collection
-                                title={item.title}
-                                total_item={item.total_item}
-                                path={item.slug}
-                                image={item.image}
-                                thumbnails={item.thumbnails}
-                                profile_image={item.profile_image}
+                                title={item.name}
+                                total_item={100}
+                                path={item.name}
+
+                                // image={item.image}
+                                // thumbnails={item.thumbnails}
+                                // profile_image={item.profile_image}
                             />
                         </div>
                     ))}
