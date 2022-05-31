@@ -1,7 +1,7 @@
 [
     {
         "name": "Coinex Smart chain testnet",
-        "key": "unknown",
+        "key": "csc",
         "chainName": "Coinex Smart chain testne",
         "rpcUrls": ["https://testnet-rpc.coinex.net/"],
         "chainId": "0x35",
