@@ -5,6 +5,7 @@ import {
     SET_WEB3_ADDRESS,
     SET_WEB3_ASSETS,
     SET_WEB3_NETWORK,
+    SET_WEB3_CONTRACT,
 } from "./types";
 
 const INITIAL_STATE = {
@@ -14,28 +15,26 @@ const INITIAL_STATE = {
     address: null,
     network: null,
     assets: [],
+    contract: {},
     networks: [
         {
             name: "Binance Smart Chain",
             rpc: "",
             chain_id: "",
-            icon:
-                "https://chainstack.com/wp-content/uploads/2021/06/bsc-icon-logo-1-1.png",
+            icon: "https://chainstack.com/wp-content/uploads/2021/06/bsc-icon-logo-1-1.png",
         },
         {
             name: "Polygon",
             rpc: "",
             chain_id: "",
-            icon:
-                "https://cdn.iconscout.com/icon/free/png-256/polygon-token-4086724-3379854.png",
+            icon: "https://cdn.iconscout.com/icon/free/png-256/polygon-token-4086724-3379854.png",
         },
     ],
     networkRef: {
         name: "Binance Smart Chain",
         rpc: "",
         chain_id: "",
-        icon:
-            "https://chainstack.com/wp-content/uploads/2021/06/bsc-icon-logo-1-1.png",
+        icon: "https://chainstack.com/wp-content/uploads/2021/06/bsc-icon-logo-1-1.png",
     },
 };
 
@@ -48,6 +47,8 @@ export default function reducer(state = INITIAL_STATE, action) {
                 draft.web3Provider = action.payload.web3Provider;
                 draft.address = action.payload.address;
                 draft.network = action.payload.network;
+                draft.contract = action.payload.contract;
+
                 draft.networks = [
                     {
                         name: "Binance Smartchain",
@@ -55,8 +56,7 @@ export default function reducer(state = INITIAL_STATE, action) {
                         chainName: "Binance Smartchain Mainnet",
                         rpcUrls: ["https://rpc-mainnet.matic.network/"],
                         chainId: "0x38",
-                        icon:
-                            "https://chainstack.com/wp-content/uploads/2021/06/bsc-icon-logo-1-1.png",
+                        icon: "https://chainstack.com/wp-content/uploads/2021/06/bsc-icon-logo-1-1.png",
                         nativeCurrency: {
                             name: "BNB",
                             symbol: "BNB",
@@ -72,8 +72,7 @@ export default function reducer(state = INITIAL_STATE, action) {
                         chainName: "Matic Mainnet",
                         rpcUrls: ["https://rpc-mainnet.matic.network/"],
                         chainId: "0x89",
-                        icon:
-                            "https://cdn.iconscout.com/icon/free/png-256/polygon-token-4086724-3379854.png",
+                        icon: "https://cdn.iconscout.com/icon/free/png-256/polygon-token-4086724-3379854.png",
                         nativeCurrency: {
                             name: "MATIC",
                             symbol: "MATIC",
@@ -97,7 +96,10 @@ export default function reducer(state = INITIAL_STATE, action) {
             return produce(state, (draft) => {
                 draft.network = action.payload.network;
             });
-
+        case SET_WEB3_CONTRACT:
+            return produce(state, (draft) => {
+                draft.contract = action.payload.contract;
+            });
         default:
             return state;
     }

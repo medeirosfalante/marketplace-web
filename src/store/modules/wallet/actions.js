@@ -4,12 +4,25 @@ import {
     SET_WEB3_ADDRESS,
     SET_WEB3_ASSETS,
     SET_WEB3_NETWORK,
+    SET_WEB3_CONTRACT,
 } from "./types";
 
-export function setProvider({ provider, web3Provider, address, network }) {
+export function setProvider({
+    provider,
+    web3Provider,
+    address,
+    network,
+    contract,
+}) {
     return {
         type: SET_WEB3_PROVIDER,
-        payload: { provider, web3Provider, address, network },
+        payload: {
+            provider,
+            web3Provider,
+            address,
+            network,
+            contract,
+        },
     };
 }
 
@@ -35,5 +48,12 @@ export function setBalances({ assets }) {
     return {
         type: SET_WEB3_ASSETS,
         payload: { assets },
+    };
+}
+
+export function setContract({ contract }) {
+    return {
+        type: SET_WEB3_CONTRACT,
+        payload: { contract },
     };
 }

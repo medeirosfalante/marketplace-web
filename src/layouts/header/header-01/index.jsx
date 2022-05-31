@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import clsx from "clsx";
 import { useMoralis } from "react-moralis";
 import Logo from "@components/logo";
@@ -26,6 +26,7 @@ import { ethers, Contract, getDefaultProvider, utils } from "ethers";
 import erc20 from "../../../data/erc20.json";
 import networkRefs from "../../../data/network.json";
 import tokens from "../../../data/tokens.json";
+import IMarketplace from "../../../data/IMarketplace.json";
 
 const providerOptions = {
     // walletconnect: {
@@ -49,9 +50,16 @@ const Header = ({ className }) => {
     const { offcanvas, offcanvasHandler } = useOffcanvas();
     const { search, searchHandler } = useFlyoutSearch();
     const dispatch = useDispatch();
-    const { isAuthenticated, provider, address, web3Provider,network, networks } = useSelector(
-        (state) => state.wallet
-    );
+    const [category, setCategory] = useState([]);
+
+    const {
+        isAuthenticated,
+        provider,
+        address,
+        web3Provider,
+        network,
+        networks,
+    } = useSelector((state) => state.wallet);
 
     const authenticate = useCallback(async () => {
         try {
@@ -60,27 +68,48 @@ const Header = ({ className }) => {
             const signer = web3Provider.getSigner();
             const address = await signer.getAddress();
             const network = await web3Provider.getNetwork();
+            const contract = new ethers.Contract(
+                "0xb78fb76Bc79b9B165B1F8C54795eD4FCB35E47eC",
+                IMarketplace.abi,
+                web3Provider
+            );
+            const categories = await contract.listCategory();
+            // const orders = await contract.listOrders();
+            // const newOrder = await contract.createOrder();
+            // console.log(contract);
+            // console.log(orders);
+            // console.log(newOrder);
 
-            let seletecItem = networkRefs.find(item => item.key == network.name)
+            let seletecItem = networkRefs.find(
+                (item) => item.key == network.name
+            );
             dispatch(WalletActions.SetNetwork(seletecItem));
+
+            setCategory(categories);
 
             dispatch(
                 WalletActions.setProvider({
                     provider,
                     web3Provider,
                     address,
-                    network:seletecItem,
+                    network: seletecItem,
+                    contract,
                 })
             );
         } catch (e) {
             console.log("connect error", e);
         }
     });
+
     const getTokens = async (address, web3Provider) => {
         let Promises = [];
-        console.log(network.chainId)
+        console.log(network.chainId);
         tokens.forEach(async (item) => {
-            const contract = new Contract(item.address[network.chainId], erc20, web3Provider);
+            const contract = new Contract(
+                item.address[network.chainId],
+                erc20,
+                web3Provider
+            );
             Promises.push(
                 new Promise((resolve, reject) => {
                     contract
@@ -102,12 +131,7 @@ const Header = ({ className }) => {
         return Promise.all(Promises);
     };
 
-    useEffect(async () => {
-
-
-      
-    }, [network]);
-
+    useEffect(async () => {}, [network]);
 
     useEffect(async () => {
         if (address && network) {
@@ -176,7 +200,10 @@ const Header = ({ className }) => {
                                     id="sideNav"
                                     className="mainmenu-nav d-none d-xl-block"
                                 >
-                                    <MainMenu menu={menuData} />
+                                    <MainMenu
+                                        menu={menuData}
+                                        categories={category}
+                                    />
                                 </nav>
                             </div>
                         </div>
@@ -215,9 +242,9 @@ const Header = ({ className }) => {
                                     <UserDropdown />
                                 </div>
                             )}
-                               <div className="setting-option rn-icon-list user-account">
-                                    <NetworkDropDown />
-                                </div>
+                            <div className="setting-option rn-icon-list user-account">
+                                <NetworkDropDown />
+                            </div>
                             <div className="setting-option rn-icon-list notification-badge">
                                 <div className="icon-box">
                                     <Anchor path={headerData.activity_link}>
@@ -246,6 +273,7 @@ const Header = ({ className }) => {
                 onClick={offcanvasHandler}
                 menu={menuData}
                 logo={headerData.logo}
+                categories={category}
             />
         </>
     );
