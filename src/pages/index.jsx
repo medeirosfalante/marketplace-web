@@ -55,7 +55,6 @@ const Home = () => {
         // });
         // console.log(collectionsRefs);
         setCollection(collections);
-        // console.log(collections);
     };
 
     useEffect(async () => {

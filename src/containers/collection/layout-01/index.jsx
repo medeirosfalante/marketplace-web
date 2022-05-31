@@ -16,7 +16,6 @@ const TopCollectionArea = ({ className, id, space, data }) => (
     >
         <div className="container">
             <div className="row mb--50 align-items-center">
-                {console.log(data)}
                 <div className="col-lg-6 col-md-6 col-sm-6 col-12">
                     {data?.section_title && (
                         <SectionTitle

@@ -76,9 +76,14 @@ const Header = ({ className }) => {
             const categories = await contract.listCategory();
             // const orders = await contract.listOrders();
             // const newOrder = await contract.createOrder();
-            // console.log(contract);
+            // const myOrders = await contract.getMyOrders();
+            const ordersByCategory = await contract.listOrdersByCategory();
+
+            console.log(contract);
             // console.log(orders);
             // console.log(newOrder);
+            // console.log(myOrders);
+            // console.log(ordersByCategory);
 
             let seletecItem = networkRefs.find(
                 (item) => item.key == network.name
