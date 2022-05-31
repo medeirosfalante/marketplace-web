@@ -12,7 +12,6 @@ const UserDropdown = () => {
 
     const { networks, network } = useSelector((state) => state.wallet);
 
-    
 
 
     const selectNetwork = (item) => {

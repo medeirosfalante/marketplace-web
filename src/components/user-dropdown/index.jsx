@@ -58,7 +58,7 @@ const UserDropdown = () => {
                 <div className="add-fund-button mt--20 pb--20">
                     <Anchor
                         className="btn btn-primary-alta w-100"
-                        path="/connect"
+                        path="/pix"
                     >
                         Add fund with fiat payment
                     </Anchor>
@@ -66,6 +66,9 @@ const UserDropdown = () => {
                 <ul className="list-inner">
                     <li>
                         <Anchor path="/user">My Profile</Anchor>
+                    </li>
+                    <li>
+                        <Anchor path="/open">OpenEnablers</Anchor>
                     </li>
                     <li>
                         <Anchor path="/edit-profile">Edit Profile</Anchor>

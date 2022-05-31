@@ -74,7 +74,7 @@ const Header = ({ className }) => {
                 web3Provider
             );
             const categories = await contract.listCategory();
-            // const orders = await contract.listOrders();
+            const orders = await contract.listOrders();
             // const newOrder = await contract.createOrder();
             // const myOrders = await contract.getMyOrders();
             const ordersByCategory = await contract.listOrdersByCategory();
