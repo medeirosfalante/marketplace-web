@@ -16,7 +16,15 @@ module.exports = {
         return config;
     },
     images: {
-        domains: ['bscscan.com','pbs.twimg.com','s2.coinmarketcap.com','chainstack.com',"cdn.iconscout.com","www.coinex.net","i.ibb.co"],
+        domains: [
+            "bscscan.com",
+            "pbs.twimg.com",
+            "s2.coinmarketcap.com",
+            "chainstack.com",
+            "cdn.iconscout.com",
+            "www.coinex.net",
+            "i.ibb.co",
+        ],
     },
-    pageExtensions: ['mdx', 'md', 'jsx', 'js', 'tsx', 'ts'],
+    pageExtensions: ["mdx", "md", "jsx", "js", "tsx", "ts"],
 };

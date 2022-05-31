@@ -20,16 +20,14 @@ import sellerData from "../data/sellers.json";
 import productData from "../data/products.json";
 import collectionsData from "../data/collections.json";
 import IMarketplace from "../data/IMarketplace.json";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export async function getStaticProps() {
     return { props: { className: "template-color-1" } };
 }
 
 const Home = () => {
-    const dispatch = useDispatch();
-    const { address, contract } = useSelector((state) => state.wallet);
+    const { contract } = useSelector((state) => state.wallet);
     const [collection, setCollection] = useState([]);
 
     const content = normalizedData(homepageData?.content || []);
@@ -50,10 +48,6 @@ const Home = () => {
             return;
         }
         const collections = await contract.listCollections();
-        // let collectionsRefs = collections.map((item) => {
-        //     return { name: item[2], address: item[1] };
-        // });
-        // console.log(collectionsRefs);
         setCollection(collections);
     };
 

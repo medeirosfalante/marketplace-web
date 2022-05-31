@@ -27,6 +27,7 @@ import erc20 from "../../../data/erc20.json";
 import networkRefs from "../../../data/network.json";
 import tokens from "../../../data/tokens.json";
 import IMarketplace from "../../../data/IMarketplace.json";
+import marketplace from "../../../data/marketplace.json";
 
 const providerOptions = {
     // walletconnect: {
@@ -59,6 +60,7 @@ const Header = ({ className }) => {
         web3Provider,
         network,
         networks,
+        contract,
     } = useSelector((state) => state.wallet);
 
     const authenticate = useCallback(async () => {
@@ -68,30 +70,27 @@ const Header = ({ className }) => {
             const signer = web3Provider.getSigner();
             const address = await signer.getAddress();
             const network = await web3Provider.getNetwork();
+
+            // console.log(`0x${network.chainId.toString(16)}`);
+            let seletecItem = networkRefs.find(
+                (item) => item.chainId == `0x${network.chainId.toString(16)}`
+            );
+
             const contract = new ethers.Contract(
-                "0xb78fb76Bc79b9B165B1F8C54795eD4FCB35E47eC",
+                marketplace.address[seletecItem.chainId],
                 IMarketplace.abi,
                 web3Provider
             );
-            const categories = await contract.listCategory();
-            const orders = await contract.listOrders();
-            // const newOrder = await contract.createOrder();
-            // const myOrders = await contract.getMyOrders();
-            const ordersByCategory = await contract.listOrdersByCategory();
 
-            console.log(contract);
+            const categories = await contract.listCategory();
+
+            // const orders = await contract.listOrders();
+            // const newOrder = await contract.createOrder();
             // console.log(orders);
             // console.log(newOrder);
-            // console.log(myOrders);
-            // console.log(ordersByCategory);
-
-            let seletecItem = networkRefs.find(
-                (item) => item.key == network.name
-            );
-            dispatch(WalletActions.SetNetwork(seletecItem));
 
             setCategory(categories);
-
+            dispatch(WalletActions.SetNetwork(seletecItem));
             dispatch(
                 WalletActions.setProvider({
                     provider,
@@ -108,30 +107,34 @@ const Header = ({ className }) => {
 
     const getTokens = async (address, web3Provider) => {
         let Promises = [];
-        console.log(network.chainId);
         tokens.forEach(async (item) => {
-            const contract = new Contract(
-                item.address[network.chainId],
-                erc20,
-                web3Provider
-            );
-            Promises.push(
-                new Promise((resolve, reject) => {
-                    contract
-                        .balanceOf(address)
-                        .then((balance) =>
-                            resolve({
-                                icon: item.icon,
-                                name: item.name,
-                                symbol: item.symbol,
-                                balance: parseFloat(
-                                    utils.formatUnits(balance, item.decimals)
-                                ),
-                            })
-                        )
-                        .catch((e) => reject(e));
-                })
-            );
+            try {
+                const contract = new Contract(
+                    item.address[network.chainId],
+                    erc20,
+                    web3Provider
+                );
+                Promises.push(
+                    new Promise((resolve, reject) => {
+                        contract
+                            .balanceOf(address)
+                            .then((balance) =>
+                                resolve({
+                                    icon: item.icon,
+                                    name: item.name,
+                                    symbol: item.symbol,
+                                    balance: parseFloat(
+                                        utils.formatUnits(
+                                            balance,
+                                            item.decimals
+                                        )
+                                    ),
+                                })
+                            )
+                            .catch((e) => reject(e));
+                    })
+                );
+            } catch (e) {}
         });
         return Promise.all(Promises);
     };
