@@ -6,7 +6,7 @@ export default reducers => {
     {
       key: "enablers-nft",
       storage,
-      whitelist: ["wallet"]
+      whitelist: [""]
     },
     reducers
   );

@@ -8,6 +8,8 @@ import {
     SET_WEB3_CONTRACT,
 } from "./types";
 
+import networkRefs from "../../../data/network.json";
+
 const INITIAL_STATE = {
     isAuthenticated: false,
     provider: null,
@@ -16,26 +18,8 @@ const INITIAL_STATE = {
     network: null,
     assets: [],
     contract: {},
-    networks: [
-        {
-            name: "Binance Smart Chain",
-            rpc: "",
-            chain_id: "",
-            icon: "https://chainstack.com/wp-content/uploads/2021/06/bsc-icon-logo-1-1.png",
-        },
-        {
-            name: "Polygon",
-            rpc: "",
-            chain_id: "",
-            icon: "https://cdn.iconscout.com/icon/free/png-256/polygon-token-4086724-3379854.png",
-        },
-    ],
-    networkRef: {
-        name: "Binance Smart Chain",
-        rpc: "",
-        chain_id: "",
-        icon: "https://chainstack.com/wp-content/uploads/2021/06/bsc-icon-logo-1-1.png",
-    },
+    networks: networkRefs,
+    networkRef: networkRefs[0],
 };
 
 export default function reducer(state = INITIAL_STATE, action) {
@@ -48,40 +32,7 @@ export default function reducer(state = INITIAL_STATE, action) {
                 draft.address = action.payload.address;
                 draft.network = action.payload.network;
                 draft.contract = action.payload.contract;
-
-                draft.networks = [
-                    {
-                        name: "Binance Smartchain",
-                        key: "bnb",
-                        chainName: "Binance Smartchain Mainnet",
-                        rpcUrls: ["https://rpc-mainnet.matic.network/"],
-                        chainId: "0x38",
-                        icon: "https://chainstack.com/wp-content/uploads/2021/06/bsc-icon-logo-1-1.png",
-                        nativeCurrency: {
-                            name: "BNB",
-                            symbol: "BNB",
-                            decimals: 18,
-                        },
-                        blockExplorerUrls: [
-                            "https://chainstack.com/wp-content/uploads/2021/06/bsc-icon-logo-1-1.png",
-                        ],
-                    },
-                    {
-                        name: "Polygon",
-                        key: "matic",
-                        chainName: "Matic Mainnet",
-                        rpcUrls: ["https://rpc-mainnet.matic.network/"],
-                        chainId: "0x89",
-                        icon: "https://cdn.iconscout.com/icon/free/png-256/polygon-token-4086724-3379854.png",
-                        nativeCurrency: {
-                            name: "MATIC",
-                            symbol: "MATIC",
-                            decimals: 18,
-                        },
-                        blockExplorerUrls: ["https://polygonscan.com/"],
-                    },
-                ];
-
+                draft.networks = networkRefs
                 draft.assets = [];
             });
         case SET_WEB3_ADDRESS:

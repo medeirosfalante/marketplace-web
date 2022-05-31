@@ -1,32 +1,30 @@
 [
     {
-        "name": "Binance Smartchain",
+        "name": "Coinex Smart chain testnet",
+        "key": "unknown",
+        "chainName": "Coinex Smart chain testne",
+        "rpcUrls": ["https://testnet-rpc.coinex.net/"],
+        "chainId": "0x35",
+        "icon": "https://www.coinex.net/images/header/coinex-logo.svg",
+        "nativeCurrency": {
+            "name": "CET",
+            "symbol": "CET",
+            "decimals": 18
+        },
+        "blockExplorerUrls": ["https://testnet.coinex.net/"]
+    },
+    {
+        "name": "Binance Smartchain Testnet",
         "key": "bnb",
-        "chainName": "Binance Smartchain Mainnet",
-        "rpcUrls": ["https://rpc-mainnet.matic.network/"],
-        "chainId": "0x38",
+        "chainName": "Binance Smartchain Testnet",
+        "rpcUrls": ["https://data-seed-prebsc-1-s1.binance.org:8545/"],
+        "chainId": "0x61",
         "icon": "https://chainstack.com/wp-content/uploads/2021/06/bsc-icon-logo-1-1.png",
         "nativeCurrency": {
             "name": "BNB",
             "symbol": "BNB",
             "decimals": 18
         },
-        "blockExplorerUrls": [
-            "https://chainstack.com/wp-content/uploads/2021/06/bsc-icon-logo-1-1.png"
-        ]
-    },
-    {
-        "name": "Polygon",
-        "key": "matic",
-        "chainName": "Matic Mainnet",
-        "rpcUrls": ["https://rpc-mainnet.matic.network/"],
-        "chainId": "0x89",
-        "icon": "https://cdn.iconscout.com/icon/free/png-256/polygon-token-4086724-3379854.png",
-        "nativeCurrency": {
-            "name": "MATIC",
-            "symbol": "MATIC",
-            "decimals": 18
-        },
-        "blockExplorerUrls": ["https://polygonscan.com/"]
+        "blockExplorerUrls": ["https://testnet.bscscan.com//"]
     }
 ]

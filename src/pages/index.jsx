@@ -49,12 +49,12 @@ const Home = () => {
         if (contract === undefined) {
             return;
         }
-        const collections = await contract.listCollections();
+        // const collections = await contract.listCollections();
         // let collectionsRefs = collections.map((item) => {
         //     return { name: item[2], address: item[1] };
         // });
         // console.log(collectionsRefs);
-        setCollection(collections);
+        setCollection([]);
         // console.log(collections);
     };
 
