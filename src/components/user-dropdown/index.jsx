@@ -68,6 +68,9 @@ const UserDropdown = () => {
                         <Anchor path="/user">My Profile</Anchor>
                     </li>
                     <li>
+                        <Anchor path="/open">OpenEnablers</Anchor>
+                    </li>
+                    <li>
                         <Anchor path="/edit-profile">Edit Profile</Anchor>
                     </li>
                     <li>
