@@ -125,9 +125,9 @@ const ExploreProductArea = ({ className, space, data }) => {
                     inputs={state.inputs}
                 />
                 <div className="row g-5">
-                    {state.products.length > 0 ? (
+                    {data?.products.length > 0 ? (
                         <>
-                            {state.products.slice(0, 10).map((prod) => (
+                            {data?.products.map((prod) => (
                                 <div
                                     key={prod.id}
                                     className="col-5 col-lg-4 col-md-6 col-sm-6 col-12"
