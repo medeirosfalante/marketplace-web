@@ -5,24 +5,28 @@ import Footer from "@layout/footer/footer-01";
 import Breadcrumb from "@components/breadcrumb";
 import ProductArea from "@containers/explore-product/layout-01";
 
+import { useSelector } from "react-redux";
 // Demo Data
-import productData from "../data/products.json";
 
 export async function getStaticProps() {
     return { props: { className: "template-color-1" } };
 }
 
+const Product = () => {
+    const { orders } = useSelector((state) => state.wallet);
+    console.log(orders);
 
-const Product = () => (
-    <Wrapper>
-        <SEO pageTitle="Product" />
-        <Header />
-        <main id="main-content">
-            <Breadcrumb pageTitle="Our Product" currentPage="Our Product" />
-            <ProductArea data={{ products: productData }} />
-        </main>
-        <Footer />
-    </Wrapper>
-);
+    return (
+        <Wrapper>
+            <SEO pageTitle="Product" />
+            <Header />
+            <main id="main-content">
+                <Breadcrumb pageTitle="Our Product" currentPage="Our Product" />
+                <ProductArea data={{ products: orders }} />
+            </main>
+            <Footer />
+        </Wrapper>
+    );
+};
 
 export default Product;

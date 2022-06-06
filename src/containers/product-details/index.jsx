@@ -14,23 +14,7 @@ import { useState, useEffect } from "react";
 
 // Demo Image
 
-const ProductDetailsArea = ({ space, className, product }) => {
-    const { contract } = useSelector((state) => state.wallet);
-    const [orderByCategory, setOrderByCategory] = useState([]);
-
-    const handleOrdersByCategory = async () => {
-        if (contract === undefined) {
-            return;
-        }
-        const ordersByCategory = await contract.listOrdersByCategory(0x01);
-        setOrderByCategory(ordersByCategory);
-        console.log(ordersByCategory);
-    };
-
-    useEffect(async () => {
-        handleOrdersByCategory();
-    }, [contract]);
-
+const ProductDetailsArea = ({ space, className, orders }) => {
     return (
         <div
             className={clsx(
@@ -39,63 +23,61 @@ const ProductDetailsArea = ({ space, className, product }) => {
                 className
             )}
         >
-            {orderByCategory.map((product) => {
+            {orders.map((prod) => {
                 return (
-                    <>
-                        {console.log(product.id)}
-                        {console.log(product.price)}
-                    </>
-                );
-            })}
-            <div className="container">
-                <div className="row g-5">
-                    <div className="col-lg-7 col-md-12 col-sm-12">
-                        <Sticky>
-                            <GalleryTab images={product.images} />
-                        </Sticky>
-                    </div>
-                    <div className="col-lg-5 col-md-12 col-sm-12 mt_md--50 mt_sm--60">
-                        <div className="rn-pd-content-area">
-                            <ProductTitle
-                                title={product.title}
-                                likeCount={product.likeCount}
-                            />
-                            <span className="bid">
-                                Height bid{" "}
-                                <span className="price">
-                                    {product.price.amount}
-                                    {product.price.currency}
-                                </span>
-                            </span>
-                            <h6 className="title-name">
-                                #22 Portal , Info bellow
-                            </h6>
-                            <div className="catagory-collection">
-                                <ProductCategory owner={product.owner} />
-                                <ProductCollection
-                                    collection={product.collection}
-                                />
+                    <div className="container">
+                        <div className="row g-5">
+                            <div className="col-lg-7 col-md-12 col-sm-12">
+                                <Sticky>
+                                    <GalleryTab images={prod.images} />
+                                </Sticky>
                             </div>
-                            <Button color="primary-alta" path="#">
-                                Unlockable content included
-                            </Button>
-                            <div className="rn-bid-details">
-                                <BidTab
-                                    bids={product?.bids}
-                                    owner={product.owner}
-                                    properties={product?.properties}
-                                    tags={product?.tags}
-                                    history={product?.history}
-                                />
-                                <PlaceBet
-                                    highest_bid={product.highest_bid}
-                                    auction_date={product?.auction_date}
-                                />
+                            <div className="col-lg-5 col-md-12 col-sm-12 mt_md--50 mt_sm--60">
+                                <div className="rn-pd-content-area">
+                                    <ProductTitle
+                                        title={prod.id.slice(-12)}
+                                        // likeCount={product.likeCount}
+                                    />
+                                    <span className="bid">
+                                        Height bid{" "}
+                                        <span className="price">
+                                            {/* {product.price.amount} */}
+                                            {/* {product.price.currency} */}
+                                        </span>
+                                    </span>
+                                    <h6 className="title-name">
+                                        #22 Portal , Info bellow
+                                    </h6>
+                                    <div className="catagory-collection">
+                                        {/* <ProductCategory
+                                        // owner={product.owner}
+                                        /> */}
+                                        {/* <ProductCollection
+                                        // collection={product.collection}
+                                        /> */}
+                                    </div>
+                                    <Button color="primary-alta" path="#">
+                                        Unlockable content included
+                                    </Button>
+                                    <div className="rn-bid-details">
+                                        {/* <BidTab
+                                            bids={product?.bids}
+                                            owner={product.owner}
+                                            properties={product?.properties}
+                                            tags={product?.tags}
+                                            history={product?.history}
+                                        /> */}
+                                        {/* <PlaceBet
+                                            highest_bid={product.highest_bid}
+                                            auction_date={product?.auction_date}
+                                        /> */}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                );
+            })}
         </div>
     );
 };

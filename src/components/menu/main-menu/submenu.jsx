@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import Anchor from "@ui/anchor";
+import { Home } from "../../../pages_template/explore-01";
 
 const SubMenu = ({ categories }) => (
     <ul className="submenu">
@@ -7,10 +8,10 @@ const SubMenu = ({ categories }) => (
             <li key={nav.id._hex}>
                 <Anchor
                     path={nav.icon}
-                    // className={nav.isLive ? "live-expo" : ""}
+                    className={nav.isLive ? "live-expo" : ""}
                 >
                     {nav.name}
-                    {/* {nav?.icon && <i className={`feather ${nav.icon}`} />} */}
+                    {nav?.icon && <i className={`feather ${nav.icon}`} />}
                 </Anchor>
             </li>
         ))}

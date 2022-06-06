@@ -134,16 +134,18 @@ const ExploreProductArea = ({ className, space, data }) => {
                                 >
                                     <Product
                                         overlay
-                                        placeBid={!!data.placeBid}
-                                        title={prod.title}
-                                        slug={prod.slug}
-                                        latestBid={prod.latestBid}
-                                        price={prod.price}
-                                        likeCount={prod.likeCount}
-                                        auction_date={prod.auction_date}
-                                        image={prod.images?.[0]}
-                                        authors={prod.authors}
-                                        bitCount={prod.bitCount}
+                                        // placeBid={!!data.placeBid}
+                                        // title={prod.title}
+                                        // slug={prod.slug}
+                                        slug={prod.id.toString()}
+                                        // latestBid={prod.latestBid}
+                                        // price={prod.price}
+                                        // likeCount={prod.likeCount}
+                                        // auction_date={prod.auction_date}
+                                        // image={prod.images?.[0]}
+                                        // authors={prod.authors}
+                                        // bitCount={prod.bitCount}
+                                        title={prod.id.slice(-12)}
                                     />
                                 </div>
                             ))}

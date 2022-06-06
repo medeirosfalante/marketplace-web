@@ -9,7 +9,7 @@ import ProductArea from "@containers/product/layout-03";
 import { shuffleArray } from "@utils/methods";
 
 // demo data
-import productData from "../../data/products.json";
+import productData from "../../data/product.json";
 
 const ProductDetails = ({ product, recentViewProducts, relatedProducts }) => {
     return (

@@ -18,6 +18,8 @@ const INITIAL_STATE = {
     network: null,
     assets: [],
     contract: {},
+    orders: [],
+    collections: [],
     networks: networkRefs,
     networkRef: networkRefs[0],
 };
@@ -32,8 +34,10 @@ export default function reducer(state = INITIAL_STATE, action) {
                 draft.address = action.payload.address;
                 draft.network = action.payload.network;
                 draft.contract = action.payload.contract;
-                draft.networks = networkRefs
+                draft.networks = networkRefs;
                 draft.assets = [];
+                draft.orders = action.payload.orders;
+                draft.collections = action.payload.collections;
             });
         case SET_WEB3_ADDRESS:
             return produce(state, (draft) => {
@@ -46,10 +50,6 @@ export default function reducer(state = INITIAL_STATE, action) {
         case SET_WEB3_NETWORK:
             return produce(state, (draft) => {
                 draft.network = action.payload.network;
-            });
-        case SET_WEB3_CONTRACT:
-            return produce(state, (draft) => {
-                draft.contract = action.payload.contract;
             });
         default:
             return state;

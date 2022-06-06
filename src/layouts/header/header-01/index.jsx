@@ -83,11 +83,8 @@ const Header = ({ className }) => {
             );
 
             const categories = await contract.listCategory();
-
-            // const orders = await contract.listOrders();
-            // const newOrder = await contract.createOrder();
-            // console.log(orders);
-            // console.log(newOrder);
+            const orders = await contract.listOrders();
+            const collections = await contract.listCollections();
 
             setCategory(categories);
             dispatch(WalletActions.SetNetwork(seletecItem));
@@ -98,6 +95,8 @@ const Header = ({ className }) => {
                     address,
                     network: seletecItem,
                     contract,
+                    orders,
+                    collections,
                 })
             );
         } catch (e) {
