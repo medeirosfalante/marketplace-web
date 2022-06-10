@@ -60,7 +60,6 @@ const Header = ({ className }) => {
         web3Provider,
         network,
         networks,
-        contract,
     } = useSelector((state) => state.wallet);
 
     const authenticate = useCallback(async () => {
@@ -82,8 +81,22 @@ const Header = ({ className }) => {
                 web3Provider
             );
 
-            const categories = await contract.listCategory();
-            const orders = await contract.listOrders();
+            const categoriesBlock = await contract.listCategory();
+            const ordersBlock = await contract.listOrders();
+            const orders = ordersBlock.map((item) => ({
+                category: item["category"].toString(),
+                id: item["id"],
+                price: item["price"].toString(),
+                seller: item["seller"],
+                nftAddress: item["nftAddress"],
+            }));
+            const categories = categoriesBlock.map((item) => ({
+                name: item["name"],
+                id: item["id"].toString(),
+                icon: "feather-home",
+                isLive: false,
+            }));
+
             const collections = await contract.listCollections();
 
             setCategory(categories);
@@ -97,6 +110,7 @@ const Header = ({ className }) => {
                     contract,
                     orders,
                     collections,
+                    categories,
                 })
             );
         } catch (e) {

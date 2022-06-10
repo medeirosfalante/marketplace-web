@@ -4,16 +4,20 @@ import Wrapper from "@layout/wrapper";
 import Header from "@layout/header/header-01";
 import Footer from "@layout/footer/footer-01";
 import Breadcrumb from "@components/breadcrumb";
-import { useSelector } from "react-redux";
 import ProductDetailsArea from "@containers/product-details";
 import ProductArea from "@containers/product/layout-03";
 import { shuffleArray } from "@utils/methods";
+import { useSelector } from "react-redux";
 
 // demo data
 import productData from "../../data/products.json";
 
-const ProductDetails = ({ recentViewProducts, relatedProducts }) => {
+const ProductDetails = ({ slug }) => {
     const { orders } = useSelector((state) => state.wallet);
+    const product = orders.find(({ id }) => id === slug);
+    console.log("product", product);
+
+    // console.log(orders[0]);
 
     return (
         <Wrapper>
@@ -24,19 +28,19 @@ const ProductDetails = ({ recentViewProducts, relatedProducts }) => {
                     pageTitle="Product Details"
                     currentPage="Product Details"
                 />
-                <ProductDetailsArea orders={orders} />
-                <ProductArea
+                <ProductDetailsArea product={product} />
+                {/* <ProductArea
                     data={{
                         section_title: { title: "Recent View" },
-                        products: recentViewProducts,
+                        products: orders,
                     }}
                 />
                 <ProductArea
                     data={{
                         section_title: { title: "Related Item" },
-                        products: relatedProducts,
+                        products: orders,
                     }}
-                />
+                /> */}
             </main>
             <Footer />
         </Wrapper>
@@ -45,28 +49,25 @@ const ProductDetails = ({ recentViewProducts, relatedProducts }) => {
 
 export async function getStaticPaths() {
     return {
-        paths: productData.map(({ slug }) => ({
-            params: {
-                slug,
-            },
-        })),
-        fallback: false,
+        paths: [],
+        fallback: true,
     };
 }
 
 export async function getStaticProps({ params }) {
-    const product = productData.find(({ slug }) => slug === params.slug);
-    const { categories } = product;
-    const recentViewProducts = shuffleArray(productData).slice(0, 5);
-    const relatedProducts = productData
-        .filter((prod) => prod.categories?.some((r) => categories?.includes(r)))
-        .slice(0, 5);
+    // const product = productData.find(({ slug }) => slug === params.slug);
+    // const { categories } = product;
+    // const recentViewProducts = shuffleArray(productData).slice(0, 5);
+    // const relatedProducts = productData
+    //     .filter((prod) => prod.categories?.some((r) => categories?.includes(r)))
+    //     .slice(0, 5);
     return {
         props: {
             className: "template-color-1",
-            product,
-            recentViewProducts,
-            relatedProducts,
+            slug: params.slug,
+            // product,
+            // recentViewProducts,
+            // relatedProducts,
         }, // will be passed to the page component as props
     };
 }

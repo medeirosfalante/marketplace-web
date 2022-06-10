@@ -22,6 +22,7 @@ const INITIAL_STATE = {
     collections: [],
     networks: networkRefs,
     networkRef: networkRefs[0],
+    categories: [],
 };
 
 export default function reducer(state = INITIAL_STATE, action) {
@@ -38,6 +39,7 @@ export default function reducer(state = INITIAL_STATE, action) {
                 draft.assets = [];
                 draft.orders = action.payload.orders;
                 draft.collections = action.payload.collections;
+                draft.categories = action.payload.categories;
             });
         case SET_WEB3_ADDRESS:
             return produce(state, (draft) => {

@@ -4,25 +4,28 @@ import clsx from "clsx";
 import SubMenu from "./submenu";
 import MegaMenu from "./megamenu";
 
-const MainMenu = ({ menu, categories }) => (
-    <ul className="mainmenu">
-        {menu.map((nav) => (
-            <li
-                key={nav.id}
-                className={clsx(
-                    !!nav.submenu && "has-droupdown has-menu-child-item",
-                    !!nav.megamenu && "with-megamenu"
-                )}
-            >
-                <Anchor className="its_new" path={nav.path}>
-                    {nav.text}
-                </Anchor>
-                {nav?.submenu && <SubMenu categories={categories} />}
-                {nav?.megamenu && <MegaMenu menu={nav.megamenu} />}
-            </li>
-        ))}
-    </ul>
-);
+const MainMenu = ({ menu, categories }) => {
+    console.log("categories", categories);
+    return (
+        <ul className="mainmenu">
+            {menu.map((nav) => (
+                <li
+                    key={nav.id}
+                    className={clsx(
+                        !!nav.submenu && "has-droupdown has-menu-child-item",
+                        !!nav.megamenu && "with-megamenu"
+                    )}
+                >
+                    <Anchor className="its_new" path={nav.path}>
+                        {nav.text}
+                    </Anchor>
+                    {nav?.submenu && <SubMenu categories={categories} />}
+                    {nav?.megamenu && <MegaMenu menu={nav.megamenu} />}
+                </li>
+            ))}
+        </ul>
+    );
+};
 
 MainMenu.propTypes = {
     menu: PropTypes.arrayOf(PropTypes.shape({})),

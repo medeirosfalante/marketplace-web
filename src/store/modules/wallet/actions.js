@@ -14,6 +14,7 @@ export function setProvider({
     contract,
     orders,
     collections,
+    categories,
 }) {
     return {
         type: SET_WEB3_PROVIDER,
@@ -25,6 +26,7 @@ export function setProvider({
             contract,
             orders,
             collections,
+            categories,
         },
     };
 }

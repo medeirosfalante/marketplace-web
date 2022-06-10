@@ -11,7 +11,7 @@ const SubMenu = ({ categories }) => (
                     className={nav.isLive ? "live-expo" : ""}
                 >
                     {nav.name}
-                    {nav?.icon && <i className={`feather ${nav.icon}`} />}
+                    {/* {nav?.icon && <i className={`feather ${nav.icon}`} />} */}
                 </Anchor>
             </li>
         ))}

@@ -14,7 +14,6 @@ export async function getStaticProps() {
 
 const Product = () => {
     const { orders } = useSelector((state) => state.wallet);
-    console.log(orders);
 
     return (
         <Wrapper>
