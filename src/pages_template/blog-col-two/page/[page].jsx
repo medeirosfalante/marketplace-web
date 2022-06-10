@@ -24,47 +24,47 @@ const BlogTwoColumn = ({ posts, pagiData, page }) => (
     </Wrapper>
 );
 
-export const getStaticPaths = async () => {
-    const pages = Math.ceil(getPostSlugs().length / POSTS_PER_PAGE);
-    const paths = Array.from(Array(pages).keys()).map((page) => ({
-        params: { page: String(page + 1) },
-    }));
+// export const getStaticPaths = async () => {
+//     const pages = Math.ceil(getPostSlugs().length / POSTS_PER_PAGE);
+//     const paths = Array.from(Array(pages).keys()).map((page) => ({
+//         params: { page: String(page + 1) },
+//     }));
 
-    return {
-        paths,
-        fallback: true,
-    };
-};
+//     return {
+//         paths,
+//         fallback: true,
+//     };
+// };
 
-export async function getStaticProps({ params }) {
-    const { page } = params;
-    const posts = getAllPosts([
-        "title",
-        "date",
-        "slug",
-        "author",
-        "image",
-        "excerpt",
-        "category",
-        "tags",
-        "timeToRead",
-    ]);
+// export async function getStaticProps({ params }) {
+//     const { page } = params;
+//     const posts = getAllPosts([
+//         "title",
+//         "date",
+//         "slug",
+//         "author",
+//         "image",
+//         "excerpt",
+//         "category",
+//         "tags",
+//         "timeToRead",
+//     ]);
 
-    return {
-        props: {
-            posts: posts.slice(
-                (page - 1) * POSTS_PER_PAGE,
-                page * POSTS_PER_PAGE
-            ),
-            className: "template-color-1",
-            page: Number(page),
-            pagiData: {
-                currentPage: Number(page),
-                numberOfPages: Math.ceil(posts.length / POSTS_PER_PAGE),
-            },
-        },
-    };
-}
+//     return {
+//         props: {
+//             posts: posts.slice(
+//                 (page - 1) * POSTS_PER_PAGE,
+//                 page * POSTS_PER_PAGE
+//             ),
+//             className: "template-color-1",
+//             page: Number(page),
+//             pagiData: {
+//                 currentPage: Number(page),
+//                 numberOfPages: Math.ceil(posts.length / POSTS_PER_PAGE),
+//             },
+//         },
+//     };
+// }
 
 BlogTwoColumn.propTypes = {
     posts: PropTypes.arrayOf(PropTypes.shape({})),

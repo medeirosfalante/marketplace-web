@@ -4,7 +4,6 @@ import Anchor from "@ui/anchor";
 import { useDispatch, useSelector } from "react-redux";
 
 const UserDropdown = () => {
-
     const { address, assets } = useSelector((state) => state.wallet);
 
     return (
@@ -29,37 +28,36 @@ const UserDropdown = () => {
                 </div>
                 <div className="rn-product-inner">
                     <ul className="product-list">
-                        {assets.map(item => (
+                        {assets.map((item) => (
                             <li className="single-product-list">
-                            <div className="thumbnail">
-                                <Anchor path="/product">
-                                    <Image
-                                        src={item.icon}
-                                        alt="Nft Product Images"
-                                        layout="fixed"
-                                        width={50}
-                                        height={50}
-                                    />
-                                </Anchor>
-                            </div>
-                            <div className="content">
-                                <h6 className="title">
-                                    <Anchor path="/product">{item.name}</Anchor>
-                                </h6>
-                                <span className="price">{item.symbol} {item.balance}</span>
-                            </div>
-                            <div className="button" />
-                        </li>
-
+                                <div className="thumbnail">
+                                    <Anchor path="/product">
+                                        <Image
+                                            src={item.icon}
+                                            alt="Nft Product Images"
+                                            layout="fixed"
+                                            width={50}
+                                            height={50}
+                                        />
+                                    </Anchor>
+                                </div>
+                                <div className="content">
+                                    <h6 className="title">
+                                        <Anchor path="/product">
+                                            {item.name}
+                                        </Anchor>
+                                    </h6>
+                                    <span className="price">
+                                        {item.symbol} {item.balance}
+                                    </span>
+                                </div>
+                                <div className="button" />
+                            </li>
                         ))}
-                        
                     </ul>
                 </div>
                 <div className="add-fund-button mt--20 pb--20">
-                    <Anchor
-                        className="btn btn-primary-alta w-100"
-                        path="/pix"
-                    >
+                    <Anchor className="btn btn-primary-alta w-100" path="/pix">
                         Add fund with fiat payment
                     </Anchor>
                 </div>

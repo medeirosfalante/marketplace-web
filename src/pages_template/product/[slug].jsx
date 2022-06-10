@@ -9,34 +9,36 @@ import ProductArea from "@containers/product/layout-03";
 import { shuffleArray } from "@utils/methods";
 
 // demo data
-import productData from "../../data/products.json";
+import productData from "../../data/product.json";
 
-const ProductDetails = ({ product, recentViewProducts, relatedProducts }) => (
-    <Wrapper>
-        <SEO pageTitle="Product Details" />
-        <Header />
-        <main id="main-content">
-            <Breadcrumb
-                pageTitle="Product Details"
-                currentPage="Product Details"
-            />
-            <ProductDetailsArea product={product} />
-            <ProductArea
-                data={{
-                    section_title: { title: "Recent View" },
-                    products: recentViewProducts,
-                }}
-            />
-            <ProductArea
-                data={{
-                    section_title: { title: "Related Item" },
-                    products: relatedProducts,
-                }}
-            />
-        </main>
-        <Footer />
-    </Wrapper>
-);
+const ProductDetails = ({ product, recentViewProducts, relatedProducts }) => {
+    return (
+        <Wrapper>
+            <SEO pageTitle="Product Details" />
+            <Header />
+            <main id="main-content">
+                <Breadcrumb
+                    pageTitle="Product Details"
+                    currentPage="Product Details"
+                />
+                <ProductDetailsArea product={product} />
+                <ProductArea
+                    data={{
+                        section_title: { title: "Recent View" },
+                        products: recentViewProducts,
+                    }}
+                />
+                <ProductArea
+                    data={{
+                        section_title: { title: "Related Item" },
+                        products: relatedProducts,
+                    }}
+                />
+            </main>
+            <Footer />
+        </Wrapper>
+    );
+};
 
 export async function getStaticPaths() {
     return {

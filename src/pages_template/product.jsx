@@ -12,16 +12,18 @@ export async function getStaticProps() {
     return { props: { className: "template-color-1" } };
 }
 
-const Product = () => (
-    <Wrapper>
-        <SEO pageTitle="Product" />
-        <Header />
-        <main id="main-content">
-            <Breadcrumb pageTitle="Our Product" currentPage="Our Product" />
-            <ProductArea data={{ products: productData }} />
-        </main>
-        <Footer />
-    </Wrapper>
-);
+const Product = () => {
+    return (
+        <Wrapper>
+            <SEO pageTitle="Product" />
+            <Header />
+            <main id="main-content">
+                <Breadcrumb pageTitle="Our Product" currentPage="Our Product" />
+                <ProductArea data={{ products: productData }} />
+            </main>
+            <Footer />
+        </Wrapper>
+    );
+};
 
 export default Product;

@@ -110,23 +110,24 @@ const ExploreProductArea = ({ className, space, data }) => {
                     inputs={state.inputs}
                 />
                 <div className="row g-5">
-                    {state.products.length > 0 ? (
+                    {data.products.length > 0 ? (
                         <>
-                            {state.products.slice(0, 10).map((prod) => (
+                            {data.products.slice(0, 10).map((prod) => (
                                 <div
                                     key={prod.id}
                                     className="col-5 col-lg-4 col-md-6 col-sm-6 col-12"
                                 >
                                     <Product
-                                        placeBid={!!data.placeBid}
-                                        title={prod.title}
-                                        slug={prod.slug}
-                                        latestBid={prod.latestBid}
-                                        price={prod.price}
-                                        likeCount={prod.likeCount}
-                                        image={prod.images?.[0]}
-                                        authors={prod.authors}
-                                        bitCount={prod.bitCount}
+                                        // placeBid={!!data.placeBid}
+                                        // title={prod.title}
+                                        slug={prod.id.toString()}
+                                        // latestBid={prod.latestBid}
+                                        // price={prod.price}
+                                        // likeCount={prod.likeCount}
+                                        // image={prod.images?.[0]}
+                                        // authors={prod.authors}
+                                        // bitCount={prod.bitCount}
+                                        title={prod.id.slice(-12)}
                                     />
                                 </div>
                             ))}

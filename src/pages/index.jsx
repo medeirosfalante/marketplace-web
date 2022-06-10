@@ -9,10 +9,8 @@ import TopSellerArea from "@containers/top-seller/layout-01";
 import ServiceArea from "@containers/services/layout-01";
 import CollectionArea from "@containers/collection/layout-01";
 import { normalizedData } from "@utils/methods";
-import * as WalletActions from "../store/modules/wallet/actions";
 
-import { useDispatch, useSelector } from "react-redux";
-import { ethers, Contract, utils } from "ethers";
+import { useSelector } from "react-redux";
 
 // Demo data
 import homepageData from "../data/homepages/home-04.json";
@@ -20,17 +18,13 @@ import sellerData from "../data/sellers.json";
 import productData from "../data/products.json";
 import collectionsData from "../data/collections.json";
 import IMarketplace from "../data/IMarketplace.json";
-import { useState } from "react";
-import { useEffect } from "react";
 
 export async function getStaticProps() {
     return { props: { className: "template-color-1" } };
 }
 
 const Home = () => {
-    const dispatch = useDispatch();
-    const { address, contract } = useSelector((state) => state.wallet);
-    const [collection, setCollection] = useState([]);
+    const { orders, collections } = useSelector((state) => state.wallet);
 
     const content = normalizedData(homepageData?.content || []);
     const liveAuctionData = productData
@@ -45,23 +39,6 @@ const Home = () => {
         )
         .slice(0, 5);
 
-    const handleCollections = async () => {
-        if (contract === undefined) {
-            return;
-        }
-        // const collections = await contract.listCollections();
-        // let collectionsRefs = collections.map((item) => {
-        //     return { name: item[2], address: item[1] };
-        // });
-        // console.log(collectionsRefs);
-        setCollection([]);
-        // console.log(collections);
-    };
-
-    useEffect(async () => {
-        handleCollections();
-    }, [contract]);
-
     return (
         <Wrapper>
             <SEO pageTitle="Home Four" />
@@ -71,13 +48,13 @@ const Home = () => {
                 <LiveExploreArea
                     data={{
                         ...content["live-explore-section"],
-                        products: liveAuctionData,
+                        products: orders,
                     }}
                 />
                 <ExploreProductArea
                     data={{
                         ...content["explore-product-section"],
-                        products: productData,
+                        products: orders,
                     }}
                 />
                 <TopSellerArea
@@ -90,7 +67,7 @@ const Home = () => {
                 <CollectionArea
                     data={{
                         ...content["collection-section"],
-                        collections: collection,
+                        collections: collections,
                     }}
                 />
             </main>
