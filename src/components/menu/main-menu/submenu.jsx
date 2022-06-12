@@ -8,7 +8,7 @@ const SubMenu = ({ categories }) => (
         {categories.map((nav) => (
             <li key={nav.id._hex}>
                 <Anchor
-                    path={explore}
+                    path={"explore"}
                     className={nav.isLive ? "live-expo" : ""}
                 >
                     {nav.name}

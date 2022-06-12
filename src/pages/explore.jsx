@@ -14,8 +14,14 @@ export async function getStaticProps() {
 }
 
 const Explore = () => {
-    const { contract, categories } = useSelector((state) => state.wallet);
-    // // const ordersCategory = orderByCategory.find(({ name }) => name === path);
+    const { orders } = useSelector((state) => state.wallet);
+
+    const ordersByCategory = orders.map((item) => {
+        if (item.category === "1") {
+            return item;
+        }
+    });
+    console.log("ordersByCategory", ordersByCategory);
 
     return (
         <Wrapper>
@@ -26,14 +32,14 @@ const Explore = () => {
                     pageTitle="Explore Filter"
                     currentPage="Explore With Filter"
                 />
-                {/* <ExploreProductArea
+                <ExploreProductArea
                     data={{
                         section_title: {
                             title: "Explore Category",
                         },
-                        products: productData,
+                        products: ordersByCategory,
                     }}
-                /> */}
+                />
             </main>
             <Footer />
         </Wrapper>
