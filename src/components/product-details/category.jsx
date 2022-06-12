@@ -6,7 +6,7 @@ import { ImageType } from "@utils/types";
 const ProductCategory = ({ className, owner }) => (
     <div className={clsx("catagory", className)}>
         <span>
-            Catagory <span className="color-body">10% royalties</span>
+            Category <span className="color-body">10% royalties</span>
         </span>
         <TopSeller
             name={owner.name}

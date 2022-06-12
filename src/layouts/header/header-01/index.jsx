@@ -96,6 +96,9 @@ const Header = ({ className }) => {
                 icon: "feather-home",
                 isLive: false,
             }));
+            const ordersByCategory =
+                contract.listOrdersByCategory("categories");
+            console.log(ordersByCategory);
 
             const collections = await contract.listCollections();
 
