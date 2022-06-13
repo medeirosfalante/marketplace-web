@@ -21,7 +21,6 @@ const Explore = () => {
             return item;
         }
     });
-    console.log("ordersByCategory", ordersByCategory);
 
     return (
         <Wrapper>

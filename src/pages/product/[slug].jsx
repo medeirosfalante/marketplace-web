@@ -31,7 +31,7 @@ const ProductDetails = ({ slug }) => {
                     currentPage="Product Details"
                 />
                 <ProductDetailsArea product={product} />
-                {/* <ProductArea
+                <ProductArea
                     data={{
                         section_title: { title: "Recent View" },
                         products: orders,
@@ -42,7 +42,7 @@ const ProductDetails = ({ slug }) => {
                         section_title: { title: "Related Item" },
                         products: orders,
                     }}
-                /> */}
+                />
             </main>
             <Footer />
         </Wrapper>
