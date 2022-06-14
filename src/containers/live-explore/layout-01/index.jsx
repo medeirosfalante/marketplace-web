@@ -67,7 +67,7 @@ const LiveExploreArea = ({ data, className, space }) => (
                             options={SliderOptions}
                             className="banner-one-slick slick-arrow-style-one rn-slick-dot-style slick-gutter-15"
                         >
-                            {data.products.map((prod) => (
+                            {data?.products.map((prod) => (
                                 <SliderItem
                                     key={prod.id}
                                     className="single-slide-product"
