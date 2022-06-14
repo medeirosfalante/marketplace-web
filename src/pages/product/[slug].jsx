@@ -8,15 +8,11 @@ import ProductDetailsArea from "@containers/product-details";
 import ProductArea from "@containers/product/layout-03";
 import { shuffleArray } from "@utils/methods";
 import { useSelector } from "react-redux";
-import dynamic from 'next/dynamic';
-import React from 'react';
+import dynamic from "next/dynamic";
+import React from "react";
 
-
-
-const withNoSSR = (Component) => dynamic(
-    () => Promise.resolve(Component),
-    { ssr: false },
-);
+const withNoSSR = (Component) =>
+    dynamic(() => Promise.resolve(Component), { ssr: false });
 
 // demo data
 import productData from "../../data/products.json";
@@ -24,9 +20,6 @@ import productData from "../../data/products.json";
 const ProductDetails = ({ slug }) => {
     const { orders } = useSelector((state) => state.wallet);
     const product = orders.find(({ id }) => id === slug);
-    console.log("product", product);
-
-    // console.log(orders[0]);
 
     return (
         <Wrapper>
@@ -38,7 +31,7 @@ const ProductDetails = ({ slug }) => {
                     currentPage="Product Details"
                 />
                 <ProductDetailsArea product={product} />
-                {/* <ProductArea
+                <ProductArea
                     data={{
                         section_title: { title: "Recent View" },
                         products: orders,
@@ -49,7 +42,7 @@ const ProductDetails = ({ slug }) => {
                         section_title: { title: "Related Item" },
                         products: orders,
                     }}
-                /> */}
+                />
             </main>
             <Footer />
         </Wrapper>

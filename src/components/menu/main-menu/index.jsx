@@ -5,7 +5,6 @@ import SubMenu from "./submenu";
 import MegaMenu from "./megamenu";
 
 const MainMenu = ({ menu, categories }) => {
-    console.log("categories", categories);
     return (
         <ul className="mainmenu">
             {menu.map((nav) => (
