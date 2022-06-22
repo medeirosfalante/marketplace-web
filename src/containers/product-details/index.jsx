@@ -15,6 +15,19 @@ import { useState, useEffect } from "react";
 // Demo Image
 
 const ProductDetailsArea = ({ space, className, product }) => {
+    const { network, categories } = useSelector((state) => state.wallet);
+    const getTokenPrice = (product) => {
+        let token = tokens.find(
+            (item) => item.address[network.chainId] == product.tokenContract
+        );
+        return (
+            <>
+                {utils.formatUnits(product?.price, token.decimals)}{" "}
+                {token.symbol}
+            </>
+        );
+    };
+
     return (
         <div
             className={clsx(
@@ -47,7 +60,9 @@ const ProductDetailsArea = ({ space, className, product }) => {
                             <ProductTitle title={product?.id} likeCount={""} />
                             <span className="bid">
                                 Height bid{" "}
-                                <span className="price">{product?.price}</span>
+                                <span className="price">
+                                    {product && getTokenPrice(product)}
+                                </span>
                             </span>
                             <h6 className="title-name">
                                 #22 Portal , Info bellow
