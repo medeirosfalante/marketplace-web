@@ -64,17 +64,19 @@ const Header = ({ className }) => {
 
     const authenticate = useCallback(async () => {
         try {
-            const provider = await web3Modal.connect();
-            const web3Provider = new ethers.providers.Web3Provider(provider);
+            provider = await web3Modal.connect();
+            let web3Provider = new ethers.providers.Web3Provider(provider);
             const signer = web3Provider.getSigner();
             const address = await signer.getAddress();
             const network = await web3Provider.getNetwork();
-
-            // console.log(`0x${network.chainId.toString(16)}`);
             let seletecItem = networkRefs.find(
                 (item) => item.chainId == `0x${network.chainId.toString(16)}`
             );
-
+            if (seletecItem == undefined) {
+                seletecItem = networkRefs[0];
+                let url = seletecItem.rpcUrls[0];
+                web3Provider = new ethers.providers.JsonRpcProvider(url);
+            }
             const contract = new ethers.Contract(
                 marketplace.address[seletecItem.chainId],
                 IMarketplace.abi,
@@ -89,15 +91,22 @@ const Header = ({ className }) => {
                 price: item["price"].toString(),
                 seller: item["seller"],
                 nftAddress: item["nftAddress"],
+                tokenContract: item["tokenContract"],
             }));
+
             const categories = categoriesBlock.map((item) => ({
                 name: item["name"],
+                icon: item["icon"],
                 id: item["id"].toString(),
                 icon: "feather-home",
                 isLive: false,
             }));
-
-            const collections = await contract.listCollections();
+            const collectionsBlock = await contract.listCollections();
+            const collections = collectionsBlock.map((item) => ({
+                name: item["name"],
+                creator: item["creator"],
+                icon: item["icon"],
+            }));
 
             setCategory(categories);
             dispatch(WalletActions.SetNetwork(seletecItem));
@@ -163,6 +172,8 @@ const Header = ({ className }) => {
 
     useEffect(() => {
         if (web3Modal && web3Modal.cachedProvider) {
+            authenticate();
+        } else {
             authenticate();
         }
     }, []);
