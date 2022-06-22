@@ -185,6 +185,30 @@ const CreateNewArea = ({ className, space }) => {
                                             </div>
                                         </div>
 
+                                        <div className="col-md-12">
+                                            <div className="input-box pb--20">
+                                                <label
+                                                    htmlFor="url"
+                                                    className="form-label"
+                                                >
+                                                    URL
+                                                </label>
+                                                <input
+                                                    id="name"
+                                                    placeholder="e. g. https://ropsten.etherscan.io/tx/"
+                                                    {...register("url", {
+                                                        required:
+                                                            "URL is required",
+                                                    })}
+                                                />
+                                                {errors.url && (
+                                                    <ErrorText>
+                                                        {errors.url?.message}
+                                                    </ErrorText>
+                                                )}
+                                            </div>
+                                        </div>
+
                                         <div className="col-md-4">
                                             <div className="input-box pb--20">
                                                 <label
