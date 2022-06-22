@@ -11,10 +11,48 @@ import PlaceBet from "@components/product-details/place-bet";
 import { ImageType } from "@utils/types";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
+import { utils } from "ethers";
+import tokens from "../../data/tokens.json";
 
 // Demo Image
 
 const ProductDetailsArea = ({ space, className, product }) => {
+    const { network, categories } = useSelector((state) => state.wallet);
+    const getTokenPrice = (product) => {
+        let token = tokens.find(
+            (item) => item.address[network.chainId] == product.tokenContract
+        );
+        return (
+            <>
+                {utils.formatUnits(product?.price, token.decimals)}{" "}
+                {token.symbol}
+            </>
+        );
+    };
+
+    const getCategory = (product) => {
+        let category = categories.find((item) => item.id == product.category);
+        return {
+            name: category.name,
+            slug: `/category/${product.category}`,
+            image: {
+                src: "/images/client/client-1.png",
+            },
+        };
+    };
+
+    const getCollection = (product) => {
+        let category = categories.find((item) => item.id == product.category);
+        return {
+            name: category.name,
+            slug: "/collection",
+            image: {
+                src: "/images/client/client-2.png",
+            },
+            total_sale: "2500,000",
+        };
+    };
+
     return (
         <div
             className={clsx(
@@ -30,13 +68,16 @@ const ProductDetailsArea = ({ space, className, product }) => {
                             <GalleryTab
                                 images={[
                                     {
-                                        src: "/images/portfolio/lg/portfolio-01.jpg",
+                                        src:
+                                            "/images/portfolio/lg/portfolio-01.jpg",
                                     },
                                     {
-                                        src: "/images/portfolio/lg/portfolio-02.jpg",
+                                        src:
+                                            "/images/portfolio/lg/portfolio-02.jpg",
                                     },
                                     {
-                                        src: "/images/portfolio/lg/portfolio-03.jpg",
+                                        src:
+                                            "/images/portfolio/lg/portfolio-03.jpg",
                                     },
                                 ]}
                             />
@@ -47,31 +88,25 @@ const ProductDetailsArea = ({ space, className, product }) => {
                             <ProductTitle title={product?.id} likeCount={""} />
                             <span className="bid">
                                 Height bid{" "}
-                                <span className="price">{product?.price}</span>
+                                <span className="price">
+                                    {product && getTokenPrice(product)}
+                                </span>
                             </span>
                             <h6 className="title-name">
                                 #22 Portal , Info bellow
                             </h6>
                             <div className="catagory-collection">
-                                <ProductCategory
-                                    owner={{
-                                        name: "Brodband",
-                                        slug: "/author",
-                                        image: {
-                                            src: "/images/client/client-1.png",
-                                        },
-                                    }}
-                                />
-                                <ProductCollection
-                                    collection={{
-                                        name: "Art Decco",
-                                        slug: "/collection",
-                                        image: {
-                                            src: "/images/client/client-2.png",
-                                        },
-                                        total_sale: "2500,000",
-                                    }}
-                                />
+                                {product && (
+                                    <ProductCategory
+                                        owner={getCategory(product)}
+                                    />
+                                )}
+
+                                {product && (
+                                    <ProductCollection
+                                        collection={getCollection(product)}
+                                    />
+                                )}
                             </div>
                             <Button color="primary-alta" path="#">
                                 Unlockable content included
