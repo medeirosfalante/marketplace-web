@@ -2,7 +2,7 @@
 
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default (request: NextApiRequest, response: NextApiResponse) => {
+export default (request, response) => {
     const nft = [
         {
             name: "Nome do Nft",
