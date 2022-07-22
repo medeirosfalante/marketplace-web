@@ -13,6 +13,7 @@ const CreateNewArea = ({ className, space }) => {
     const [selectedImage, setSelectedImage] = useState();
     const [hasImageError, setHasImageError] = useState(false);
     const [previewData, setPreviewData] = useState({});
+    const [nftData, setNftData] = useState({});
 
     const {
         register,
@@ -35,11 +36,26 @@ const CreateNewArea = ({ className, space }) => {
         }
     };
 
-    const onSubmit = (data, e) => {
+    const onSubmit = async (data, e) => {
         const { target } = e;
         const submitBtn =
             target.localName === "span" ? target.parentElement : target;
         const isPreviewBtn = submitBtn.dataset?.btn;
+
+        const nftMint = await fetch("/api/mint", {
+            method: "Post",
+            headers: {
+                "content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+        // .then(function (res) {
+        //     return res.json();
+        // });
+
+        setNftData(nftMint);
+        console.log(nftMint);
+
         setHasImageError(!selectedImage);
         if (isPreviewBtn && selectedImage) {
             setPreviewData({ ...data, image: selectedImage });
@@ -160,7 +176,7 @@ const CreateNewArea = ({ className, space }) => {
                                                     htmlFor="Discription"
                                                     className="form-label"
                                                 >
-                                                    Discription
+                                                    Description
                                                 </label>
                                                 <textarea
                                                     id="discription"
